@@ -9,6 +9,7 @@ git clone https://github.com/cbnu-sequence/proreviewer-backend.git
 ### 2. 로컬 환경에서 실행하기
 
 ```
+npm install
 npm start
 ```
 
