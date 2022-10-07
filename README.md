@@ -3,7 +3,7 @@
 ### 1. 깃 클론받기
 
 ```
-git clone https://github.com/cbnu-sequence/proreviewer-backend.git
+git clone https://github.com/geunu97/wanted-pre-onboarding-fe-7.git
 ```
 
 ### 2. 로컬 환경에서 실행하기
