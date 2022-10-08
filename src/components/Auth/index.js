@@ -1,7 +1,7 @@
-import { useLogin } from "../../hooks/useLogin";
+import { useAuth } from "../../hooks/useAuth";
 
-const Login = () => {
-  const { email, password, onChange, disabled } = useLogin();
+const Auth = () => {
+  const { email, password, onChange, disabled } = useAuth();
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -33,4 +33,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Auth;

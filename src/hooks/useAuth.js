@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react";
 
-export const useLogin = () => {
+export const useAuth = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 

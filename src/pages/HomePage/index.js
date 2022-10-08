@@ -1,9 +1,9 @@
-import Login from "../../components/Login";
+import Auth from "../../components/Auth";
 
 const HomePage = () => {
   return (
     <>
-      <Login />
+      <Auth />
     </>
   );
 };
