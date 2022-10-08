@@ -1,34 +1,31 @@
 import { useCallback } from "react";
 import { postAuth } from "../apis/auth";
-import { signInApiUrl, signUpApiUrl } from "../apis/common/apiUrls";
 import { useNavigate } from "react-router-dom";
 import { setToken } from "../utils/token";
 import { useInput } from "./useInput";
-
-const postAuthSuccess = (response, navigate) => {
-  setToken(response.access_token);
-  navigate("/todo");
-};
 
 export const useAuth = () => {
   const email = useInput("");
   const password = useInput("");
   const navigate = useNavigate();
 
-  const onClickButton = useCallback(
-    async (e) => {
-      let apiData = {
-        url: signUpApiUrl,
-        data: { email: email.value, password: password.value },
-      };
-
-      e.target.name === "login" &&
-        (apiData = { ...apiData, url: signInApiUrl });
-
-      const response = await postAuth(apiData);
-      response && postAuthSuccess(response, navigate);
+  const onSuccessAuth = useCallback(
+    (response) => {
+      setToken(response.access_token);
+      navigate("/todo");
     },
-    [email.value, navigate, password.value]
+    [navigate]
+  );
+
+  const onClickButton = useCallback(
+    async (url) => {
+      const response = await postAuth({
+        url: url,
+        data: { email: email.value, password: password.value },
+      });
+      response && onSuccessAuth(response);
+    },
+    [email.value, onSuccessAuth, password.value]
   );
 
   return {

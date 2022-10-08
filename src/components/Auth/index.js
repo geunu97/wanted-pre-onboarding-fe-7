@@ -1,3 +1,4 @@
+import { signInApiUrl, signUpApiUrl } from "../../apis/common/apiUrls";
 import { useAuth } from "../../hooks/useAuth";
 
 const Auth = () => {
@@ -21,7 +22,7 @@ const Auth = () => {
         type="button"
         name="login"
         disabled={disabled}
-        onClick={onClickButton}
+        onClick={() => onClickButton(signInApiUrl)}
       >
         로그인
       </button>
@@ -29,7 +30,7 @@ const Auth = () => {
         type="button"
         name="register"
         disabled={disabled}
-        onClick={onClickButton}
+        onClick={() => onClickButton(signUpApiUrl)}
       >
         회원가입
       </button>
