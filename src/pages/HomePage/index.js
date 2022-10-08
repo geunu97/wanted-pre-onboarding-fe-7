@@ -1,9 +1,9 @@
-import Home from "../../components/Home";
+import Login from "../../components/Login";
 
 const HomePage = () => {
   return (
     <>
-      <Home />
+      <Login />
     </>
   );
 };
