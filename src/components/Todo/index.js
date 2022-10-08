@@ -1,13 +1,11 @@
-import { useGetTodos } from "../../hooks/useGetTodos";
 import { useTodo } from "../../hooks/useTodo";
 
 const Todo = () => {
-  const todos = useGetTodos();
-  const { content, onSubmitTodo } = useTodo();
+  const { todos, content, onCreateTodo } = useTodo();
 
   return (
     <>
-      <form onSubmit={onSubmitTodo}>
+      <form onSubmit={onCreateTodo}>
         <input
           type="text"
           placeholder="내용을 입력해주세요."
