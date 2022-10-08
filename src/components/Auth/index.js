@@ -8,7 +8,7 @@ const Auth = () => {
   };
 
   return (
-    <form onSubmit={onSubmit}>
+    <form>
       <input
         type="email"
         name="email"
@@ -23,10 +23,10 @@ const Auth = () => {
         value={password}
         onChange={onChange}
       />
-      <button type="submit" disabled={disabled}>
+      <button type="button" disabled={disabled}>
         로그인
       </button>
-      <button type="submit" disabled={disabled}>
+      <button type="button" disabled={disabled}>
         회원가입
       </button>
     </form>
