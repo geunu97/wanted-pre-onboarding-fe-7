@@ -1,7 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
-import { createTodo } from "../apis/todo";
+import { createTodo, getTodos, updateTodo } from "../apis/todo";
 import { useInput } from "./useInput";
-import { getTodos } from "../apis/todo";
 
 export const useTodo = () => {
   const [todos, setTodos] = useState([]);
@@ -21,9 +20,17 @@ export const useTodo = () => {
     [content.value, onGetTodos]
   );
 
+  const onUpdateTodo = useCallback(
+    async (id, todo, isCompleted) => {
+      await updateTodo(id, { todo: todo, isCompleted: isCompleted });
+      onGetTodos();
+    },
+    [onGetTodos]
+  );
+
   useEffect(() => {
     onGetTodos();
   }, [onGetTodos]);
 
-  return { todos, content, onCreateTodo };
+  return { todos, content, onCreateTodo, onUpdateTodo };
 };

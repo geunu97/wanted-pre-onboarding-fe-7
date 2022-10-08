@@ -21,3 +21,16 @@ export const getFetchOptions = (url) => {
     headers: { Authorization: `Bearer ${accessToken}` },
   };
 };
+
+export const putFetchOptions = (url, data) => {
+  const { accessToken } = getToken();
+  return {
+    method: "put",
+    url: url,
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: accessToken ? `Bearer ${accessToken}` : "",
+    },
+    data: data,
+  };
+};

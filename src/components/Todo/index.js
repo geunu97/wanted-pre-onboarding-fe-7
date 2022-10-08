@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useTodo } from "../../hooks/useTodo";
 
 const Todo = () => {
-  const { todos, content, onCreateTodo } = useTodo();
+  const { todos, content, onCreateTodo, onUpdateTodo } = useTodo();
   const [editMode, setEditMode] = useState(false);
 
   return (
@@ -25,7 +25,13 @@ const Todo = () => {
               </span>
               {editMode ? (
                 <span>
-                  <button>제출</button>
+                  <button
+                    onClick={() =>
+                      onUpdateTodo(item.id, item.todo, item.isCompleted)
+                    }
+                  >
+                    제출
+                  </button>
                   <button onClick={() => setEditMode(false)}>취소</button>
                 </span>
               ) : (
