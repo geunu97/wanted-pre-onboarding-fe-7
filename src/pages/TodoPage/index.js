@@ -1,11 +1,10 @@
 import Todo from "../../components/Todo";
+import { useRedirect } from "../../hooks/useRedirect";
 
 const TodoPage = () => {
-  return (
-    <>
-      <Todo />
-    </>
-  );
+  useRedirect();
+
+  return <Todo />;
 };
 
 export default TodoPage;
