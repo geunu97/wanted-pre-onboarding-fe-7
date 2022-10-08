@@ -24,7 +24,10 @@ const Login = () => {
         onChange={onChange}
       />
       <button type="submit" disabled={disabled}>
-        제출
+        로그인
+      </button>
+      <button type="submit" disabled={disabled}>
+        회원가입
       </button>
     </form>
   );
