@@ -1,14 +1,14 @@
 import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useLocalStorage } from "./useStorage";
+import { getToken } from "../utils/token";
 
 export const useRedirect = () => {
   const { pathname } = useLocation();
   const navigate = useNavigate();
-  const { getItem } = useLocalStorage();
+  const { accessToken } = getToken();
 
   useEffect(() => {
-    pathname === "/" && getItem("access_token") && navigate("/todo");
-    pathname === "/todo" && !getItem("access_token") && navigate("/");
+    pathname === "/" && accessToken && navigate("/todo");
+    pathname === "/todo" && !accessToken && navigate("/");
   });
 };

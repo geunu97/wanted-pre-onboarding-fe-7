@@ -1,12 +1,4 @@
-import { useEffect, useState } from "react";
-
-export const useLocalStorage = () => {
-  const [mount, setMount] = useState(false);
-
-  useEffect(() => {
-    setMount(true);
-  }, []);
-
+export const webStorage = () => {
   const setItem = (key, value) => {
     localStorage.setItem(key, JSON.stringify(value));
   };
@@ -19,5 +11,5 @@ export const useLocalStorage = () => {
     localStorage.removeItem(key);
   };
 
-  return { mount, setItem, getItem, removeItem };
+  return { setItem, getItem, removeItem };
 };

@@ -2,21 +2,17 @@ import { useCallback, useState } from "react";
 import { postAuth } from "../apis/auth";
 import { signInApiUrl, signUpApiUrl } from "../apis/common/apiUrls";
 import { useNavigate } from "react-router-dom";
-import { useLocalStorage } from "./useStorage";
+import { setToken } from "../utils/token";
 
-const postAuthSuccess = (response, localStorage, navigate) => {
-  const { mount, setItem } = localStorage;
-
+const postAuthSuccess = (response, navigate) => {
+  setToken(response.access_token);
   navigate("/todo");
-  mount && setItem("access_token", response.access_token);
 };
 
 export const useAuth = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
   const navigate = useNavigate();
-  const localStorage = useLocalStorage();
 
   const onChangeInput = useCallback((e) => {
     const { name, value } = e.target;
@@ -31,9 +27,9 @@ export const useAuth = () => {
         (apiData = { ...apiData, url: signInApiUrl });
 
       const response = await postAuth(apiData);
-      response && postAuthSuccess(response, localStorage, navigate);
+      response && postAuthSuccess(response, navigate);
     },
-    [email, localStorage, navigate, password]
+    [email, navigate, password]
   );
 
   return {
