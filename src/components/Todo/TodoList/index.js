@@ -1,6 +1,6 @@
 import { useEditTodo } from "../../../hooks/useEditTodo";
 
-const TodoList = ({ todos, onUpdateTodo }) => {
+const TodoList = ({ todos, onUpdateTodo, onDeleteTodo }) => {
   const {
     editModeId,
     setEditModeId,
@@ -39,7 +39,7 @@ const TodoList = ({ todos, onUpdateTodo }) => {
               <span>
                 {item.todo} {item.isCompleted ? " (완료)" : " (미완료)"}
                 <button onClick={() => onConvertEditMode(item)}>수정</button>
-                <button>삭제</button>
+                <button onClick={() => onDeleteTodo(item.id)}>삭제</button>
               </span>
             )}
           </li>

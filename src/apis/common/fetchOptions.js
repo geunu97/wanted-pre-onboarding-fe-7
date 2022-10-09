@@ -34,3 +34,12 @@ export const putFetchOptions = (url, data) => {
     data: data,
   };
 };
+
+export const deleteFetchOptions = (url) => {
+  const { accessToken } = getToken();
+  return {
+    method: "delete",
+    url: url,
+    headers: { Authorization: accessToken ? `Bearer ${accessToken}` : "" },
+  };
+};

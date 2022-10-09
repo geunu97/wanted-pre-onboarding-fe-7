@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import { createTodo, getTodos, updateTodo } from "../apis/todo";
+import { createTodo, deleteTodo, getTodos, updateTodo } from "../apis/todo";
 import { useInput } from "./useInput";
 
 export const useTodo = () => {
@@ -28,9 +28,17 @@ export const useTodo = () => {
     [onGetTodos]
   );
 
+  const onDeleteTodo = useCallback(
+    async (id) => {
+      await deleteTodo(id);
+      onGetTodos();
+    },
+    [onGetTodos]
+  );
+
   useEffect(() => {
     onGetTodos();
   }, [onGetTodos]);
 
-  return { todos, content, onCreateTodo, onUpdateTodo };
+  return { todos, content, onCreateTodo, onUpdateTodo, onDeleteTodo };
 };

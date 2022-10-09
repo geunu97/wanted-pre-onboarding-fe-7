@@ -4,6 +4,7 @@ import {
   getFetchOptions,
   postFetchOptions,
   putFetchOptions,
+  deleteFetchOptions,
 } from "./common/fetchOptions";
 
 export const getTodos = async () => {
@@ -11,9 +12,13 @@ export const getTodos = async () => {
 };
 
 export const createTodo = async (data) => {
-  return await fetcher(postFetchOptions(todoApiUrl, data));
+  await fetcher(postFetchOptions(todoApiUrl, data));
 };
 
 export const updateTodo = async (id, data) => {
-  return await fetcher(putFetchOptions(`${todoApiUrl}/:${id}`, data));
+  await fetcher(putFetchOptions(`${todoApiUrl}/:${id}`, data));
+};
+
+export const deleteTodo = async (id) => {
+  await fetcher(deleteFetchOptions(`${todoApiUrl}/:${id}`));
 };
