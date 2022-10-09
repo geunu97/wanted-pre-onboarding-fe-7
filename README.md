@@ -22,5 +22,5 @@ http://localhost:3000/
 ## 배포 링크 (데모 영상 대체)
 
 ```
-...
+https://wanted-geunu97.netlify.app/
 ```
