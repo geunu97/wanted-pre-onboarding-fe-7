@@ -3,7 +3,16 @@ import { useTodo } from "../../hooks/useTodo";
 
 const Todo = () => {
   const { todos, content, onCreateTodo, onUpdateTodo } = useTodo();
-  const [editMode, setEditMode] = useState(false);
+  const [editModeId, setEditModeId] = useState(-1);
+  const [editContent, setEditContent] = useState({
+    todo: "",
+    isCompleted: false,
+  });
+
+  const onEdit = ({ id, isCompleted, todo }) => {
+    setEditModeId(id);
+    setEditContent({ todo: todo, isCompleted: isCompleted });
+  };
 
   return (
     <>
@@ -20,23 +29,36 @@ const Todo = () => {
         {todos &&
           todos.map((item) => (
             <li key={item.id}>
-              <span>
-                {item.todo} {item.isCompleted ? " O" : " X"}
-              </span>
-              {editMode ? (
+              {editModeId === item.id ? (
                 <span>
-                  <button
-                    onClick={() =>
-                      onUpdateTodo(item.id, item.todo, item.isCompleted)
+                  <input
+                    type="text"
+                    value={editContent.todo}
+                    onChange={(e) =>
+                      setEditContent({ ...editContent, todo: e.target.value })
                     }
-                  >
-                    제출
-                  </button>
-                  <button onClick={() => setEditMode(false)}>취소</button>
+                  />
+                  <input
+                    type="checkbox"
+                    checked={editContent.isCompleted}
+                    onChange={(e) =>
+                      setEditContent({
+                        ...editContent,
+                        isCompleted: e.target.checked,
+                      })
+                    }
+                  />
+                  <span onClick={() => setEditModeId(-1)}>
+                    <button onClick={() => onUpdateTodo(item.id, editContent)}>
+                      제출
+                    </button>
+                    <button>취소</button>
+                  </span>
                 </span>
               ) : (
                 <span>
-                  <button onClick={() => setEditMode(true)}>수정</button>
+                  {item.todo} {item.isCompleted ? " O" : " X"}
+                  <button onClick={() => onEdit(item)}>수정</button>
                   <button>삭제</button>
                 </span>
               )}

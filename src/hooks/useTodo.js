@@ -21,8 +21,8 @@ export const useTodo = () => {
   );
 
   const onUpdateTodo = useCallback(
-    async (id, todo, isCompleted) => {
-      await updateTodo(id, { todo: todo, isCompleted: isCompleted });
+    async (id, contents) => {
+      await updateTodo(id, contents);
       onGetTodos();
     },
     [onGetTodos]
