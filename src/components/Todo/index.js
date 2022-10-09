@@ -1,18 +1,15 @@
-import { useState } from "react";
+import { useEditTodo } from "../../hooks/useEditTodo";
 import { useTodo } from "../../hooks/useTodo";
 
 const Todo = () => {
   const { todos, content, onCreateTodo, onUpdateTodo } = useTodo();
-  const [editModeId, setEditModeId] = useState(-1);
-  const [editContent, setEditContent] = useState({
-    todo: "",
-    isCompleted: false,
-  });
-
-  const onEdit = ({ id, isCompleted, todo }) => {
-    setEditModeId(id);
-    setEditContent({ todo: todo, isCompleted: isCompleted });
-  };
+  const {
+    editModeId,
+    setEditModeId,
+    editContent,
+    onChangeEditContent,
+    onConvertEditMode,
+  } = useEditTodo();
 
   return (
     <>
@@ -33,20 +30,15 @@ const Todo = () => {
                 <span>
                   <input
                     type="text"
+                    name="todo"
                     value={editContent.todo}
-                    onChange={(e) =>
-                      setEditContent({ ...editContent, todo: e.target.value })
-                    }
+                    onChange={onChangeEditContent}
                   />
                   <input
                     type="checkbox"
+                    name="isCompleted"
                     checked={editContent.isCompleted}
-                    onChange={(e) =>
-                      setEditContent({
-                        ...editContent,
-                        isCompleted: e.target.checked,
-                      })
-                    }
+                    onChange={onChangeEditContent}
                   />
                   <span onClick={() => setEditModeId(-1)}>
                     <button onClick={() => onUpdateTodo(item.id, editContent)}>
@@ -57,8 +49,8 @@ const Todo = () => {
                 </span>
               ) : (
                 <span>
-                  {item.todo} {item.isCompleted ? " O" : " X"}
-                  <button onClick={() => onEdit(item)}>수정</button>
+                  {item.todo} {item.isCompleted ? " (완료)" : " (미완료)"}
+                  <button onClick={() => onConvertEditMode(item)}>수정</button>
                   <button>삭제</button>
                 </span>
               )}
